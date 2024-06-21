@@ -6,8 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2qakd"]
 size = Vector2(96, 32)
 
-[node name="Brick" type="StaticBody2D"]
+[node name="Brick" type="StaticBody2D" node_paths=PackedStringArray("_collisionShape")]
 script = ExtResource("1_018pg")
+_collisionShape = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_8fvwn")

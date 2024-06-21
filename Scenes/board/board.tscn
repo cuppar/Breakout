@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://q25hbw7ew35e"]
+
+[ext_resource type="Script" path="res://scenes/board/Board.cs" id="1_a3pe4"]
+[ext_resource type="PackedScene" uid="uid://b1wlmyv82qj13" path="res://scenes/player_platform/player_platform.tscn" id="2_0ji4u"]
+[ext_resource type="PackedScene" uid="uid://bwpnlbdb6luox" path="res://scenes/brick/brick.tscn" id="3_uv4jy"]
+[ext_resource type="Texture2D" uid="uid://bfbp3g6syngy" path="res://scenes/board/wall.png" id="4_sunf2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00a6n"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lstjo"]
+size = Vector2(1152, 20)
+
+[node name="Board" type="Node2D" node_paths=PackedStringArray("_left", "_right", "_top", "_bottom")]
+script = ExtResource("1_a3pe4")
+_left = NodePath("Walls/Left/CollisionShape2D")
+_right = NodePath("Walls/Right/CollisionShape2D")
+_top = NodePath("Walls/Top/CollisionShape2D")
+_bottom = NodePath("Walls/Bottom/CollisionShape2D")
+
+[node name="PlayerPlatfrom" parent="." instance=ExtResource("2_0ji4u")]
+position = Vector2(590, 606)
+
+[node name="Brick" parent="." instance=ExtResource("3_uv4jy")]
+position = Vector2(90, 82)
+
+[node name="Brick2" parent="." instance=ExtResource("3_uv4jy")]
+position = Vector2(210, 82)
+
+[node name="Brick3" parent="." instance=ExtResource("3_uv4jy")]
+position = Vector2(328, 82)
+
+[node name="Walls" type="Node2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="Left" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, 324)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Left"]
+scale = Vector2(1.25, 40.5)
+texture = ExtResource("4_sunf2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Left"]
+shape = SubResource("RectangleShape2D_00a6n")
+
+[node name="Right" type="StaticBody2D" parent="Walls"]
+position = Vector2(1152, 324)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Right"]
+scale = Vector2(1.25, 40.5)
+texture = ExtResource("4_sunf2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Right"]
+shape = SubResource("RectangleShape2D_00a6n")
+
+[node name="Top" type="StaticBody2D" parent="Walls"]
+position = Vector2(576, 0)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Top"]
+scale = Vector2(72, 1.25)
+texture = ExtResource("4_sunf2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top"]
+shape = SubResource("RectangleShape2D_lstjo")
+
+[node name="Bottom" type="StaticBody2D" parent="Walls"]
+position = Vector2(576, 648)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Bottom"]
+scale = Vector2(72, 1.25)
+texture = ExtResource("4_sunf2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom"]
+shape = SubResource("RectangleShape2D_lstjo")
