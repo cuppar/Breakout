@@ -11,12 +11,18 @@ config_version=5
 [application]
 
 config/name="Breakout"
+run/main_scene="res://scenes/test/Test.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 SceneTranslation="*res://addons/scene_translation/scene_translation.tscn"
+
+[display]
+
+window/size/always_on_top=true
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
