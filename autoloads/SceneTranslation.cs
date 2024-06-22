@@ -14,7 +14,7 @@ public static class SceneTranslation
         public static readonly StringName FadeToBlack = "fade_to_black";
         public static readonly StringName FadeFromBlack = "fade_from_black";
         public static readonly StringName ChangeSceneToFile = "change_scene_to_file";
-        public static readonly StringName GChangeSceneToFileWithPause = "change_scene_to_file_with_pause";
+        public static readonly StringName ChangeSceneToFileWithPause = "change_scene_to_file_with_pause";
     }
 
     #endregion
