@@ -1,6 +1,7 @@
-using Breakout.autoloads;
 using Breakout.constants;
+using Breakout.scenes.ball;
 using Breakout.scenes.brick;
+using Breakout.scenes.ui;
 using Godot;
 
 namespace Breakout.scenes.board;
@@ -15,6 +16,9 @@ public partial class Board : Node2D
 
     [Export] private float _playerPlatformDistanceFromBottom = 50;
     [Export] private float _playerPlatformDistanceFromBricks = 200;
+
+
+    private int _score;
 
     private Vector2 Size
     {
@@ -43,13 +47,34 @@ public partial class Board : Node2D
         }
     }
 
-    public override async void _Ready()
+    public override void _Ready()
     {
+        InitSignals();
         InitPlayerPlatformPosition();
         InitBricks();
-        await ToSignal(GetTree().CreateTimer(5.0), SceneTreeTimer.SignalName.Timeout);
-        GD.Print(
-            $"SceneTranslation: {AutoloadManager.SceneTranslation.Call(SceneTranslation.MethodName.ChangeSceneToFile, ScenePaths.Brick)}");
+        InitScore();
+    }
+
+    private void InitScore()
+    {
+        _score = 0;
+        UI.UpdateScore(_score);
+    }
+
+    private void InitSignals()
+    {
+        Ball.HitBrick += OnBallHitBrick;
+        Ball.HitBottomWall += OnBallHitBottomWall;
+    }
+
+    private void OnBallHitBottomWall()
+    {
+        GD.Print("GameOver");
+    }
+
+    private void OnBallHitBrick()
+    {
+        UI.UpdateScore(++_score);
     }
 
     private void InitPlayerPlatformPosition()
@@ -116,6 +141,11 @@ public partial class Board : Node2D
     [Export] private CollisionShape2D _top;
     [Export] private CollisionShape2D _bottom;
     [Export] private CharacterBody2D _playerPlatform;
+    [Export] private CharacterBody2D _ball;
+    [Export] private CanvasLayer _ui;
+
+    private Ball Ball => (Ball)_ball;
+    private UI UI => (UI)_ui;
 
     #endregion
 }

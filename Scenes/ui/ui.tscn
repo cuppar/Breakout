@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://ute1dafcgarc"]
+
+[ext_resource type="Script" path="res://scenes/ui/UI.cs" id="1_2dxcp"]
+
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("_score")]
+script = ExtResource("1_2dxcp")
+_score = NodePath("Score")
+
+[node name="Score" type="Label" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 0, 0, 1)
+offset_left = 31.0
+offset_right = 72.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 72
+text = "0"
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="AB" type="Node2D" parent="Node2D"]

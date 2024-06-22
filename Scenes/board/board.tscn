@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://q25hbw7ew35e"]
+[gd_scene load_steps=8 format=3 uid="uid://q25hbw7ew35e"]
 
 [ext_resource type="Script" path="res://scenes/board/Board.cs" id="1_a3pe4"]
 [ext_resource type="PackedScene" uid="uid://b1wlmyv82qj13" path="res://scenes/player_platform/player_platform.tscn" id="2_0ji4u"]
+[ext_resource type="PackedScene" uid="uid://cce3xq3bwlk2v" path="res://scenes/ball/ball.tscn" id="4_pmkai"]
 [ext_resource type="Texture2D" uid="uid://bfbp3g6syngy" path="res://scenes/board/wall.png" id="4_sunf2"]
+[ext_resource type="PackedScene" uid="uid://ute1dafcgarc" path="res://scenes/ui/ui.tscn" id="5_hvvmg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00a6n"]
 size = Vector2(20, 648)
@@ -10,14 +12,16 @@ size = Vector2(20, 648)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lstjo"]
 size = Vector2(1152, 20)
 
-[node name="Board" type="Node2D" node_paths=PackedStringArray("_left", "_right", "_top", "_bottom", "_playerPlatform")]
+[node name="Board" type="Node2D" node_paths=PackedStringArray("_left", "_right", "_top", "_bottom", "_playerPlatform", "_ball", "_ui")]
 script = ExtResource("1_a3pe4")
 _brickGapH = 10.0
 _left = NodePath("Walls/Left/CollisionShape2D")
 _right = NodePath("Walls/Right/CollisionShape2D")
 _top = NodePath("Walls/Top/CollisionShape2D")
-_bottom = NodePath("Walls/Bottom/CollisionShape2D")
+_bottom = NodePath("Walls/BottomWall/CollisionShape2D")
 _playerPlatform = NodePath("PlayerPlatfrom")
+_ball = NodePath("Ball")
+_ui = NodePath("UI")
 
 [node name="PlayerPlatfrom" parent="." instance=ExtResource("2_0ji4u")]
 position = Vector2(576, 598)
@@ -58,13 +62,18 @@ texture = ExtResource("4_sunf2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top"]
 shape = SubResource("RectangleShape2D_lstjo")
 
-[node name="Bottom" type="StaticBody2D" parent="Walls"]
+[node name="BottomWall" type="StaticBody2D" parent="Walls"]
 position = Vector2(576, 648)
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Walls/Bottom"]
+[node name="Sprite2D" type="Sprite2D" parent="Walls/BottomWall"]
 scale = Vector2(72, 1.25)
 texture = ExtResource("4_sunf2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
 shape = SubResource("RectangleShape2D_lstjo")
+
+[node name="Ball" parent="." instance=ExtResource("4_pmkai")]
+position = Vector2(576, 416)
+
+[node name="UI" parent="." instance=ExtResource("5_hvvmg")]
