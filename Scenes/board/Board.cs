@@ -6,7 +6,6 @@ using Godot;
 
 namespace Breakout.scenes.board;
 
-[Tool]
 public partial class Board : Node2D
 {
     [Export] private float _brickGapH = 20;
@@ -58,13 +57,13 @@ public partial class Board : Node2D
     private void InitScore()
     {
         _score = 0;
-        UI.UpdateScore(_score);
+        _ui.UpdateScore(_score);
     }
 
     private void InitSignals()
     {
-        Ball.HitBrick += OnBallHitBrick;
-        Ball.HitBottomWall += OnBallHitBottomWall;
+        _ball.HitBrick += OnBallHitBrick;
+        _ball.HitBottomWall += OnBallHitBottomWall;
     }
 
     private void OnBallHitBottomWall()
@@ -74,7 +73,7 @@ public partial class Board : Node2D
 
     private void OnBallHitBrick()
     {
-        UI.UpdateScore(++_score);
+        _ui.UpdateScore(++_score);
     }
 
     private void InitPlayerPlatformPosition()
@@ -141,11 +140,8 @@ public partial class Board : Node2D
     [Export] private CollisionShape2D _top;
     [Export] private CollisionShape2D _bottom;
     [Export] private CharacterBody2D _playerPlatform;
-    [Export] private CharacterBody2D _ball;
-    [Export] public UI UI;
-
-    private Ball Ball => (Ball)_ball;
-    // private UI UI => (UI)_ui;
+    [Export] private Ball _ball;
+    [Export] private UI _ui;
 
     #endregion
 }
