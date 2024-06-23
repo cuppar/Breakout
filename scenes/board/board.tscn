@@ -72,7 +72,7 @@ texture = ExtResource("4_sunf2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
 shape = SubResource("RectangleShape2D_lstjo")
 
-[node name="Ball" parent="." instance=ExtResource("4_pmkai")]
-position = Vector2(576, 416)
-
 [node name="UI" parent="." instance=ExtResource("5_hvvmg")]
+
+[node name="Ball" parent="." instance=ExtResource("4_pmkai")]
+position = Vector2(576, 441)

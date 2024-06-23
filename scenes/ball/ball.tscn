@@ -8,8 +8,6 @@ radius = 20.0
 
 [node name="Ball" type="CharacterBody2D"]
 script = ExtResource("1_qt3n1")
-Speed = 200.72
-Direction = Vector2(0.225, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_efnjo")

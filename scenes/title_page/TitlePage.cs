@@ -19,7 +19,7 @@ public partial class TitlePage : Control
 
     private static void OnStartButtonPressed()
     {
-        AutoloadManager.SceneTranslation.Call(SceneTranslation.MethodName.ChangeSceneToFile, ScenePaths.Board);
+        AutoloadManager.SceneTranslation.Call(SceneTranslation.MethodName.ChangeSceneToFileWithPause, ScenePaths.Board);
     }
 
 

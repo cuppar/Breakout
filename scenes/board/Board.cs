@@ -6,14 +6,16 @@ namespace Breakout.scenes;
 
 public partial class Board : Node2D
 {
-    [Export] private float _brickGapH = 20;
-    [Export] private float _brickGapV = 10;
+    [Export] private float _brickGapH = 5;
+    [Export] private float _brickGapV = 5;
 
     private PackedScene _brickScene = GD.Load<PackedScene>(ScenePaths.Brick);
 
     [Export] private float _playerPlatformDistanceFromBottom = 50;
     [Export] private float _playerPlatformDistanceFromBricks = 200;
 
+    [Export] public double BallInitMinSpeed = 200;
+    [Export] public double BallInitMaxSpeed = 400;
 
     private int _score;
 
@@ -55,6 +57,19 @@ public partial class Board : Node2D
         InitPlayerPlatformPosition();
         InitBricks();
         InitScore();
+        InitBall();
+    }
+
+    private void InitBall()
+    {
+        _ball.Speed = (float)GD.RandRange(BallInitMinSpeed, BallInitMaxSpeed);
+
+        _ball.Direction = new Vector2(GD.RandRange(-1, 1), GD.RandRange(-1, 1)).Normalized();
+        if (_ball.Direction == Vector2.Zero)
+            _ball.Direction = Vector2.Up;
+
+        _ball.GlobalPosition = new Vector2(_bottom.GlobalPosition.X,
+            _playerPlatform.GlobalPosition.Y - _playerPlatformDistanceFromBricks / 2);
     }
 
     private void InitScore()

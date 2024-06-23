@@ -13,7 +13,7 @@ self_modulate = Color(1, 0, 0, 1)
 offset_left = 31.0
 offset_right = 72.0
 offset_bottom = 99.0
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 128
 text = "0"
 
 [node name="GameOver" type="Label" parent="."]
