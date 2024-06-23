@@ -1,10 +1,7 @@
 using Breakout.constants;
-using Breakout.scenes.ball;
-using Breakout.scenes.brick;
-using Breakout.scenes.ui;
 using Godot;
 
-namespace Breakout.scenes.board;
+namespace Breakout.scenes;
 
 public partial class Board : Node2D
 {

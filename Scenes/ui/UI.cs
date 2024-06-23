@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Breakout.scenes.ui;
+namespace Breakout.scenes;
 
 public partial class UI : CanvasLayer
 {

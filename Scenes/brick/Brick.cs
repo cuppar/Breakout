@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Breakout.scenes.brick;
+namespace Breakout.scenes;
 
 public partial class Brick : StaticBody2D
 {

@@ -1,7 +1,6 @@
-using Breakout.scenes.brick;
 using Godot;
 
-namespace Breakout.scenes.ball;
+namespace Breakout.scenes;
 
 public partial class Ball : CharacterBody2D
 {

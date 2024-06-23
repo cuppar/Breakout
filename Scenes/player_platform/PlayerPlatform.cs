@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Breakout.scenes.player_platform;
+namespace Breakout.scenes;
 
 public partial class PlayerPlatform : CharacterBody2D
 {
