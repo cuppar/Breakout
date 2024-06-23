@@ -60,16 +60,17 @@ public partial class Board : Node2D
         InitBall();
     }
 
-    private void InitBall()
+    private async void InitBall()
     {
-        _ball.Speed = (float)GD.RandRange(BallInitMinSpeed, BallInitMaxSpeed);
-
-        _ball.Direction = new Vector2(GD.RandRange(-1, 1), GD.RandRange(-1, 1)).Normalized();
-        if (_ball.Direction == Vector2.Zero)
-            _ball.Direction = Vector2.Up;
-
         _ball.GlobalPosition = new Vector2(_bottom.GlobalPosition.X,
-            _playerPlatform.GlobalPosition.Y - _playerPlatformDistanceFromBricks / 2);
+            _bottom.GlobalPosition.Y - _playerPlatformDistanceFromBottom - _playerPlatformDistanceFromBricks / 2);
+
+        _ball.Active = false;
+        await ToSignal(GetTree().CreateTimer(0.5), SceneTreeTimer.SignalName.Timeout);
+
+        _ball.Active = true;
+        _ball.Speed = (float)GD.RandRange(BallInitMinSpeed, BallInitMaxSpeed);
+        _ball.Direction = new Vector2(GD.RandRange(-1, 1), GD.RandRange(-1, 1)).Normalized();
     }
 
     private void InitScore()

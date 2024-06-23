@@ -22,6 +22,7 @@ public partial class Ball : CharacterBody2D
     [Export] public double HalfDegChangeAfterCollision = 20;
     [Export] public int HalfSpeedChangeAfterCollision = 50;
     [Export] public float MinSpeed = 400;
+    [Export] public bool Active = true;
 
     [Export]
     public float Speed
@@ -70,6 +71,9 @@ public partial class Ball : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (!Active)
+            return;
+
         var collision = MoveAndCollide(Velocity * (float)delta);
         if (collision == null) return;
         var collider = collision.GetCollider();
