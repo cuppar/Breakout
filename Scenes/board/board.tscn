@@ -12,7 +12,7 @@ size = Vector2(20, 648)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lstjo"]
 size = Vector2(1152, 20)
 
-[node name="Board" type="Node2D" node_paths=PackedStringArray("_left", "_right", "_top", "_bottom", "_playerPlatform", "_ball", "_ui")]
+[node name="Board" type="Node2D" node_paths=PackedStringArray("_left", "_right", "_top", "_bottom", "_playerPlatform", "_ball")]
 script = ExtResource("1_a3pe4")
 _brickGapH = 10.0
 _left = NodePath("Walls/Left/CollisionShape2D")
@@ -21,7 +21,6 @@ _top = NodePath("Walls/Top/CollisionShape2D")
 _bottom = NodePath("Walls/BottomWall/CollisionShape2D")
 _playerPlatform = NodePath("PlayerPlatfrom")
 _ball = NodePath("Ball")
-_ui = NodePath("UI")
 
 [node name="PlayerPlatfrom" parent="." instance=ExtResource("2_0ji4u")]
 position = Vector2(576, 598)
