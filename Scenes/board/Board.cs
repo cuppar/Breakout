@@ -142,10 +142,10 @@ public partial class Board : Node2D
     [Export] private CollisionShape2D _bottom;
     [Export] private CharacterBody2D _playerPlatform;
     [Export] private CharacterBody2D _ball;
-    [Export] private CanvasLayer _ui;
+    [Export] public UI UI;
 
     private Ball Ball => (Ball)_ball;
-    private UI UI => (UI)_ui;
+    // private UI UI => (UI)_ui;
 
     #endregion
 }
