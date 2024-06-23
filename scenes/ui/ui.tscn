@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" path="res://scenes/ui/UI.cs" id="1_2dxcp"]
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("_score")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("_score", "_gameOverLabel")]
 script = ExtResource("1_2dxcp")
 _score = NodePath("Score")
+_gameOverLabel = NodePath("GameOver")
 
 [node name="Score" type="Label" parent="."]
 unique_name_in_owner = true
@@ -14,3 +15,21 @@ offset_right = 72.0
 offset_bottom = 99.0
 theme_override_font_sizes/font_size = 72
 text = "0"
+
+[node name="GameOver" type="Label" parent="."]
+modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.5
+offset_top = -66.0
+offset_right = 260.5
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 96
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1

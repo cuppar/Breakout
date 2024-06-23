@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace Breakout.scenes;
@@ -14,13 +15,47 @@ public partial class Ball : CharacterBody2D
 
     #endregion
 
-    [Export] public float Speed { get; set; }
+    private Vector2 _direction = Vector2.Down;
 
-    [Export] public Vector2 InitDirection { get; set; }
+    private float _speed = 200;
+
+    [Export]
+    public float Speed
+    {
+        get => _speed;
+        set
+        {
+            if (Math.Abs(_speed - value) < float.Epsilon)
+                return;
+
+            _speed = value;
+            UpdateVelocity();
+        }
+    }
+
+    [Export]
+    public Vector2 Direction
+    {
+        get => _direction;
+        set
+        {
+            if (_direction == value)
+                return;
+
+            _direction = value;
+            UpdateVelocity();
+        }
+    }
+
+    private void UpdateVelocity()
+    {
+        Velocity = Direction.Normalized() * _speed;
+    }
+
 
     public override void _Ready()
     {
-        Velocity = InitDirection.Normalized() * Speed;
+        UpdateVelocity();
     }
 
     public override void _PhysicsProcess(double delta)

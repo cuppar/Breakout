@@ -1,3 +1,4 @@
+using Breakout.autoloads;
 using Breakout.constants;
 using Godot;
 
@@ -46,6 +47,11 @@ public partial class Board : Node2D
     public override void _Ready()
     {
         InitSignals();
+        NewGame();
+    }
+
+    private void NewGame()
+    {
         InitPlayerPlatformPosition();
         InitBricks();
         InitScore();
@@ -60,12 +66,14 @@ public partial class Board : Node2D
     private void InitSignals()
     {
         _ball.HitBrick += OnBallHitBrick;
-        _ball.HitBottomWall += OnBallHitBottomWall;
+        _ball.HitBottomWall += OnGameOver;
     }
 
-    private void OnBallHitBottomWall()
+    private async void OnGameOver()
     {
-        GD.Print("GameOver");
+        _ui.ShowGameOver();
+        await ToSignal(GetTree().CreateTimer(2), SceneTreeTimer.SignalName.Timeout);
+        AutoloadManager.SceneTranslation.Call(SceneTranslation.MethodName.ChangeSceneToFile, ScenePaths.TitlePage);
     }
 
     private void OnBallHitBrick()
