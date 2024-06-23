@@ -14,7 +14,3 @@ offset_right = 72.0
 offset_bottom = 99.0
 theme_override_font_sizes/font_size = 72
 text = "0"
-
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="AB" type="Node2D" parent="Node2D"]
