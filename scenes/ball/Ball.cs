@@ -8,21 +8,24 @@ public partial class Ball : CharacterBody2D
     #region Delegates
 
     [Signal]
-    public delegate void HitBottomWallEventHandler();
+    public delegate void GameOverEventHandler();
 
     [Signal]
     public delegate void HitBrickEventHandler();
+
+    [Signal]
+    public delegate void HitWallEventHandler();
 
     #endregion
 
     private Vector2 _direction = Vector2.Down;
 
     private float _speed = 200;
+    [Export] public bool Active = true;
 
     [Export] public double HalfDegChangeAfterCollision = 20;
     [Export] public int HalfSpeedChangeAfterCollision = 50;
     [Export] public float MinSpeed = 400;
-    [Export] public bool Active = true;
 
     [Export]
     public float Speed
@@ -81,8 +84,9 @@ public partial class Ball : CharacterBody2D
         // 如果和地面碰撞，游戏结束
         if (collider is StaticBody2D wall && wall.Name == "BottomWall")
         {
-            EmitSignal(SignalName.HitBottomWall);
+            EmitSignal(SignalName.GameOver);
             QueueFree();
+            return;
         }
 
 
@@ -107,9 +111,14 @@ public partial class Ball : CharacterBody2D
 
 
         // 如果是和砖块碰撞，把碰到的砖块销毁，并加分
-        if (collider is not Brick brick) return;
-
-        EmitSignal(SignalName.HitBrick);
-        brick.QueueFree();
+        if (collider is Brick brick)
+        {
+            EmitSignal(SignalName.HitBrick);
+            brick.QueueFree();
+        }
+        else
+        {
+            EmitSignal(SignalName.HitWall);
+        }
     }
 }

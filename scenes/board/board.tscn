@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://q25hbw7ew35e"]
+[gd_scene load_steps=11 format=3 uid="uid://q25hbw7ew35e"]
 
 [ext_resource type="Script" path="res://scenes/board/Board.cs" id="1_a3pe4"]
 [ext_resource type="PackedScene" uid="uid://b1wlmyv82qj13" path="res://scenes/player_platform/player_platform.tscn" id="2_0ji4u"]
 [ext_resource type="PackedScene" uid="uid://cce3xq3bwlk2v" path="res://scenes/ball/ball.tscn" id="4_pmkai"]
 [ext_resource type="Texture2D" uid="uid://bfbp3g6syngy" path="res://scenes/board/wall.png" id="4_sunf2"]
 [ext_resource type="PackedScene" uid="uid://ute1dafcgarc" path="res://scenes/ui/ui.tscn" id="5_hvvmg"]
+[ext_resource type="AudioStream" uid="uid://c00j8ib26npnx" path="res://scenes/board/hit_brick.wav" id="6_3nd2y"]
+[ext_resource type="AudioStream" uid="uid://dag2xb0pv6iyj" path="res://scenes/board/hit_wall.wav" id="7_xevqg"]
+[ext_resource type="AudioStream" uid="uid://ww7qjowv4y0y" path="res://scenes/board/game_over.wav" id="8_85fxi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00a6n"]
 size = Vector2(20, 648)
@@ -12,7 +15,7 @@ size = Vector2(20, 648)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lstjo"]
 size = Vector2(1152, 20)
 
-[node name="Board" type="Node2D" node_paths=PackedStringArray("_left", "_right", "_top", "_bottom", "_playerPlatform", "_ball", "_ui")]
+[node name="Board" type="Node2D" node_paths=PackedStringArray("_left", "_right", "_top", "_bottom", "_playerPlatform", "_ball", "_ui", "_hitWallSound", "_hitBrickSound", "_gameOverSound")]
 script = ExtResource("1_a3pe4")
 _left = NodePath("Walls/Left/CollisionShape2D")
 _right = NodePath("Walls/Right/CollisionShape2D")
@@ -21,6 +24,9 @@ _bottom = NodePath("Walls/BottomWall/CollisionShape2D")
 _playerPlatform = NodePath("PlayerPlatfrom")
 _ball = NodePath("Ball")
 _ui = NodePath("UI")
+_hitWallSound = NodePath("Sounds/HitWall")
+_hitBrickSound = NodePath("Sounds/HitBrick")
+_gameOverSound = NodePath("Sounds/GameOver")
 
 [node name="PlayerPlatfrom" parent="." instance=ExtResource("2_0ji4u")]
 position = Vector2(576, 598)
@@ -76,3 +82,14 @@ shape = SubResource("RectangleShape2D_lstjo")
 
 [node name="Ball" parent="." instance=ExtResource("4_pmkai")]
 position = Vector2(576, 441)
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="HitBrick" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("6_3nd2y")
+
+[node name="HitWall" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("7_xevqg")
+
+[node name="GameOver" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("8_85fxi")

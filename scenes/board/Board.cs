@@ -14,10 +14,10 @@ public partial class Board : Node2D
     [Export] private float _playerPlatformDistanceFromBottom = 50;
     [Export] private float _playerPlatformDistanceFromBricks = 200;
 
-    [Export] public double BallInitMinSpeed = 200;
-    [Export] public double BallInitMaxSpeed = 400;
-
     private int _score;
+
+    [Export] public double BallInitMaxSpeed = 400;
+    [Export] public double BallInitMinSpeed = 200;
 
     private Vector2 Size
     {
@@ -82,12 +82,19 @@ public partial class Board : Node2D
     private void InitSignals()
     {
         _ball.HitBrick += OnBallHitBrick;
-        _ball.HitBottomWall += OnGameOver;
+        _ball.GameOver += OnGameOver;
+        _ball.HitWall += OnBallHitWall;
+    }
+
+    private void OnBallHitWall()
+    {
+        _hitWallSound.Play();
     }
 
     private async void OnGameOver()
     {
         _ui.ShowGameOver();
+        _gameOverSound.Play();
         await ToSignal(GetTree().CreateTimer(2), SceneTreeTimer.SignalName.Timeout);
         AutoloadManager.SceneTranslation.Call(SceneTranslation.MethodName.ChangeSceneToFile, ScenePaths.TitlePage);
     }
@@ -95,6 +102,7 @@ public partial class Board : Node2D
     private void OnBallHitBrick()
     {
         _ui.UpdateScore(++_score);
+        _hitBrickSound.Play();
     }
 
     private void InitPlayerPlatformPosition()
@@ -163,6 +171,9 @@ public partial class Board : Node2D
     [Export] private CharacterBody2D _playerPlatform;
     [Export] private Ball _ball;
     [Export] private UI _ui;
+    [Export] private AudioStreamPlayer2D _hitWallSound;
+    [Export] private AudioStreamPlayer2D _hitBrickSound;
+    [Export] private AudioStreamPlayer2D _gameOverSound;
 
     #endregion
 }

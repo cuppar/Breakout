@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SceneTranslation="*res://addons/scene_translation/scene_translation.tscn"
+Bgm="res://autoloads/bgm/bgm.tscn"
 
 [display]
 
@@ -50,3 +51,4 @@ move_right={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true

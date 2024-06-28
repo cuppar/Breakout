@@ -6,6 +6,6 @@
         <EnableDynamicLoading>true</EnableDynamicLoading>
     </PropertyGroup>
     <ItemGroup>
-      <Content Include="readme.md" />
+        <Content Include="readme.md"/>
     </ItemGroup>
 </Project>
